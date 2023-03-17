@@ -1,0 +1,263 @@
+Hasmap.java
+
+
+import java.util.*;
+
+public class hashmap {
+
+public static void main(String[] args) {
+
+	Scanner sc = new Scanner(System.in);
+	System.out.println("----MENU----");
+	System.out.println("1. Add");
+	System.out.println("2. Display using entrySet");
+	System.out.println("3. Display using keySet");
+	System.out.println("4. Search");
+	System.out.println("5. Delete");
+	System.out.println("6. Update");
+	System.out.println("7. Sort");
+	System.out.println("8. clear");
+	System.out.println("9. size");
+	System.out.println("10. Exit");
+
+	String usn,name;
+	Map<String,String> hmap = new HashMap<>();
+	while(true)
+	{
+		System.out.print("Enter your choice : ");
+		int ch = sc.nextInt();
+		
+		if(ch==1)
+		{
+			System.out.print("Enter USN : ");
+			usn = sc.next();
+			System.out.print("Enter Name : ");
+			name = sc.next();
+			hmap.put(usn, name);
+		}
+		else if(ch==2)
+		{
+			for(Map.Entry<String,String> n:hmap.entrySet())
+			{
+				System.out.print("USN : " + n.getKey());
+				System.out.println(" Name : " + n.getValue());
+			}
+		}
+		else if(ch==3)
+		{
+			System.out.println("KEYS : " + hmap.keySet());
+		}
+		else if(ch==4)
+		{
+			System.out.print("Enter the key you want to search : ");
+			String key = sc.next();
+			if(hmap.containsKey(key))
+				System.out.println("Name : "+ hmap.get(key));
+			else
+				System.out.println("Key not found");
+		}
+		else if(ch==5)
+		{
+			System.out.print("Enter USN to delete : ");
+			usn = sc.next();
+			hmap.remove(usn);
+		}
+		else if(ch==6)
+		{
+			System.out.print("Enter USN to update : ");
+			usn = sc.next();
+			
+			System.out.print("Enter Name to update : ");
+			name = sc.next();
+			
+			hmap.replace(usn,name);
+		
+		}
+		else if(ch==7)
+		{
+			Map<String,String> tmap = new TreeMap<>();
+			tmap.putAll(hmap);
+			System.out.println(tmap);
+		}
+		else if(ch==8)
+		{
+			hmap.clear();
+			System.out.println(hmap);
+		}
+		else if(ch==9)
+		{
+			System.out.println("Size : " + hmap.size());
+		}
+		else if(ch==10)
+		{
+			break;
+		}
+		else
+			System.out.println("Invalid choice");
+	
+	}
+	sc.close();
+}
+}
+
+obj_hashmap.java
+
+import java.util.*;
+
+public class obj_hashmap {
+	String usn,name;
+	
+	obj_hashmap(String usn, String name)
+	{
+		this.usn = usn;
+		this.name = name;
+	}
+	
+	void add(Map<String,String> hmap)
+	{
+		hmap.put(this.usn, this.name);
+	}
+	
+	void display(Map<String,String> hmap)
+	{
+		System.out.println(hmap);
+	}
+	
+	void update(Map<String,String> hmap)
+	{
+		hmap.replace(this.usn, this.name);
+	}
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		obj_hashmap obj = null;
+		
+		String usn,name;
+		Map<String,String> hmap = new HashMap<>();
+		
+		System.out.println("----MENU----");
+		System.out.println("1. Add");
+		System.out.println("2. Display");
+		System.out.println("3. Update");
+		
+		while(true)
+		{
+			System.out.print("Enter your choice : ");
+			int ch = sc.nextInt();
+			if(ch==1)
+			{
+				System.out.print("Enter USN : ");
+				usn = sc.next();
+				System.out.print("Enter Name : ");
+				name = sc.next();
+				obj = new obj_hashmap(usn,name);
+				
+				obj.add(hmap);
+			}
+			else if(ch==2)
+				obj.display(hmap);
+			else if(ch==3)
+			{
+				System.out.print("Enter USN to update the name: ");
+				usn = sc.next();
+				System.out.print("Enter new Name : ");
+				name = sc.next();
+				
+				obj = new obj_hashmap(usn,name);
+				
+				obj.update(hmap);
+			}
+		}	
+	}
+
+}
+
+
+Treemap.java
+
+import java.util.*;
+
+public class treemap {
+
+public static void main(String[] args) {
+
+	Scanner sc = new Scanner(System.in);
+	
+	System.out.println("----MENU----");
+	System.out.println("1. Add");
+	System.out.println("2. Get");
+	System.out.println("3. Display using keySet");
+	System.out.println("4. put if absent");
+	System.out.println("5. pollFirstEntry");
+	System.out.println("6. pollLastEntry");
+	System.out.println("7. Delete");
+	System.out.println("8. clear");
+	System.out.println("9. Exit");
+	
+	String usn,name;
+	Map<String,String> tmap = new TreeMap<>();
+	
+	while(true)
+	{
+		System.out.print("Enter your choice : ");
+		int ch = sc.nextInt();
+		
+		if(ch==1)
+		{
+			System.out.print("Enter USN : ");
+			usn = sc.next();
+			System.out.print("Enter Name : ");
+			name = sc.next();
+			tmap.put(usn, name);
+		}
+		else if(ch==2)
+		{
+			System.out.print("Enter USN to display name : ");
+			usn = sc.next();
+			System.out.println("Name : " + tmap.get(usn));
+		}
+		else if(ch==3)
+		{
+			System.out.println("KEYS : " + tmap.keySet());
+		}
+		else if(ch==4)
+		{
+			System.out.print("Enter USN : ");
+			usn = sc.next();
+			System.out.print("Enter Name : ");
+			name = sc.next();
+			tmap.putIfAbsent(usn, name);
+		}
+		else if(ch==5)
+		{
+			System.out.println(((TreeMap<String, String>) tmap).pollFirstEntry());
+		}
+		else if(ch==6)
+		{
+			System.out.println(((TreeMap<String, String>) tmap).pollLastEntry());
+		}
+		else if(ch==7)
+		{
+			System.out.print("Enter USN to delete : ");
+			usn = sc.next();
+			tmap.remove(usn);
+		}
+		else if(ch==8)
+		{
+			tmap.clear();
+			System.out.println(tmap);
+		}
+		else if(ch==9)
+		{
+			break;
+		}
+		else
+			System.out.println("Invalid choice");
+	
+	}
+	sc.close();
+}
+
+}
+

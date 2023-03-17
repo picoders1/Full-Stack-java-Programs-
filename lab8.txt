@@ -1,0 +1,68 @@
+Maincontroller.java
+
+package com.durgesh;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class MainController {
+
+	@RequestMapping("/")
+	public String index() {
+		return "index";
+	}
+	
+	@RequestMapping("/page2")
+	public String page2(@RequestParam String sname , @RequestParam String scourse , Model model) {
+		model.addAttribute("sname", sname);
+		model.addAttribute("scourse",scourse);
+		return "page2";
+	}
+}
+
+
+index.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!doctype html>
+<html>
+<head>
+<title>Index</title>
+</head>
+<body>
+	<form action="page2" method="get">
+		<label>Student Name:</label>
+		<input type="text" name="sname"><br>
+		<label>Student Course</label>
+		<input type="text" name="scourse"><br>
+		<button type="submit">Submit</button>
+	</form>	
+</body>
+</html>
+
+page2.jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home Page</title>
+</head>
+<body>
+	<center>
+		<h3>Home Page</h3>
+		<h5>Student Details</h5>
+		Student Name = ${sname} <br>
+		Student Course = ${scourse}
+
+	</center>
+</body>
+</html>
+
